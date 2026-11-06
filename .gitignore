@@ -1,0 +1,12 @@
+target/
+.m2/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+.env
+*.log
+.scannerwork
+data/

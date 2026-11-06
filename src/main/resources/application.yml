@@ -1,0 +1,73 @@
+server:
+  port: ${PORT:8009}
+  error:
+    include-message: never
+    include-binding-errors: never
+
+spring:
+  application:
+    name: ms-pse
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:ms-pse}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=utf8&serverTimezone=${TIMEZONE:America/Bogota}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    open-in-view: false
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        globally_quoted_identifiers_skip_column_definitions: true
+        jdbc.time_zone: ${TIMEZONE:America/Bogota}
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+app:
+  seed: ${APP_SEED:true}
+  zone: ${TIMEZONE:America/Bogota}
+  landing-url: ${LANDINGPAGE_URL:}
+  hash-secret: ${PSE_HASH_SECRET:}
+  build:
+    url: ${MS_BUILD_URL:http://localhost:8008}
+    system-user-id: ${PSE_SYSTEM_USER_ID:119}
+    method-id: ${PSE_BUILD_METHOD_ID:2}
+    office-id: ${PSE_BUILD_OFFICE_ID:1}
+    status-id: ${PSE_BUILD_STATUS_ID:1}
+    electronic: ${PSE_ELECTRONIC_BUILD:false}
+  service:
+    url: ${MS_SERVICE_URL:http://localhost:8007}
+  pse:
+    url: ${PSE_URL:}
+    auth-path: ${PSE_AUTH_PATH:}
+    version: ${PSE_VERSION:v2}
+    api-key: ${PSE_API_KEY:}
+    client-id: ${PSE_CLIENT_ID:}
+    client-secret: ${PSE_CLIENT_SECRET:}
+    encrypt-key: ${PSE_ENCRYPT_KEY:}
+    encrypt-iv: ${PSE_ENCRYPT_IV:}
+    entity-code: ${PSE_ENTITY_CODE:}
+    service-code: ${PSE_SERVICE_CODE:}
+    entity-url: ${PSE_ENTITY_URL:}
+    beneficiary-type: ${PSE_BENEFICIARY_TYPE:}
+    beneficiary-identify: ${PSE_BENEFICIARY_IDENTIFY:}
+    beneficiary-name: ${PSE_BENEFICIARY_NAME:}
+    beneficiary-category: ${PSE_BENEFICIARY_CATEGORY:}
+    timeout-seconds: ${PSE_TIMEOUT_SECONDS:30}
+    description-max-length: ${PSE_DESCRIPTION_MAX_LENGTH:80}
+  pending:
+    enabled: ${PSE_PENDING_JOB:true}
+    cron: ${PSE_PENDING_CRON:0 */3 * * * *}
+    max-hours: ${PSE_PENDING_MAX_HOURS:24}
+  recaptcha:
+    enabled: ${RECAPTCHA_ENABLED:true}
+    secret: ${RECAPTCHA_SECRET_KEY:}
+    verify-url: ${RECAPTCHA_VERIFY_URL:https://www.google.com/recaptcha/api/siteverify}
+
+logging:
+  level:
+    root: ${LOG_LEVEL:INFO}
+    org.hibernate.SQL: warn

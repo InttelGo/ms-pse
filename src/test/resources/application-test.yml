@@ -1,0 +1,26 @@
+app:
+  seed: true
+  zone: America/Bogota
+  landing-url: https://landing.test/
+  hash-secret: test-secret
+  pending:
+    enabled: false
+  recaptcha:
+    enabled: true
+    secret: test
+  pse:
+    entity-code: "901132952"
+    service-code: "1001"
+    entity-url: "https://landing.test/pse/verify/"
+    encrypt-key: TESTKEY0123456789ABCDEFGHIJKLMNO
+    encrypt-iv: TESTIV0123456789
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:mspse;MODE=MySQL;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
